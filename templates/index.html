@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Attendance System</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="header">
+        <div class="logo-box"></div>
+        <div class="text-section">
+          <h1>University Institute of Technology</h1>
+          <h2>Maharshi Dayanand University</h2>
+        </div>
+      </div>
+
+      <div class="container">
+        <h1>FaceTrack UIET</h1>
+        <div class="video-container">
+          <img src="{{ url_for('video_feed') }}" alt="Video Feed" id="video" />
+        </div>
+        <div class="controls">
+          <button id="mark-btn">Mark Attendance</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('mark-btn').onclick = function() {
+          fetch('/mark_attendance', {method: 'POST'})
+            .then(res => res.json())
+            .then(data => alert(data.message));
+      };
+    </script>
+  </body>
+</html>

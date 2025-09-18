@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Logs</title>
+    <link rel="stylesheet" href="static/style2.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Attendance Logs</h1>
+
+        <!-- Log file selection -->
+        <form method="POST" action="/logs">
+            <label for="date">Select a Date:</label>
+            <select id="date" name="date">
+                {% for file in files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="button">View Logs</button>
+        </form>
+
+        {% if attendance_data %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in attendance_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        
+        <br>
+        <a href="/" class="button">Go Back</a>
+    </div>
+</body>
+</html>
